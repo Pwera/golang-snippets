@@ -1,2 +1,5 @@
 .idea
 .gitconfig
+
+integration/twitter/variables.env
+integration/twitter/mongodbdata/

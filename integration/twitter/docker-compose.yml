@@ -1,0 +1,65 @@
+version: '3.1'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8085:8080"
+    depends_on:
+      - mongo
+      - nsqlookupd
+      - nsqd
+    command: ./api/api
+  counter:  
+    build: .
+    depends_on:
+      - mongo
+      - nsqlookupd
+      - nsqd
+    command: ./counter/counter 
+  votes:  
+    build: .
+    command: ./votes/votes
+    env_file:
+    - variables.env
+    depends_on:
+      - mongo
+      - nsqlookupd
+      - nsqd
+  nsqlookupd:
+    image: nsqio/nsq
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+    command: /nsqlookupd
+  nsqd:
+    image: nsqio/nsq
+    ports:
+    - "4150:4150"
+    - "4151:4151"
+    command: /nsqd --broadcast-address=nsqlookupd --lookupd-tcp-address=nsqlookupd:4160
+    depends_on:
+      - nsqlookupd
+  nsqadmin:
+    image: nsqio/nsq
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    ports:
+    - "4171:4171"
+    depends_on:
+      - nsqlookupd
+      - nsqd
+  nsqtail:
+    image: nsqio/nsq
+    command: /nsq_tail --topic="votes" --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd
+      - nsqd
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=ballots
+    command: mongod --dbpath /data/db
+    volumes:
+      - ./mongodbdata:/data/db

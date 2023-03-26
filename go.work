@@ -4,4 +4,5 @@ use (
 	./circuitbreaker
 	./testing/testcontainers-go
 	./functional/fuego
+	./integration/twitter
 )
