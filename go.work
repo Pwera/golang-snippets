@@ -2,8 +2,9 @@ go 1.18
 
 use (
 	./circuitbreaker
+	./functional/fuego
+	./integration/tilt
+	./integration/twitter
 	./testing/testcontainers-go
 	./testing/testify
-	./functional/fuego
-	./integration/twitter
 )
