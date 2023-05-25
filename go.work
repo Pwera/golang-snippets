@@ -3,6 +3,7 @@ go 1.18
 use (
 	./circuitbreaker
 	./functional/fuego
+	./integration/grpc
 	./integration/tilt
 	./integration/twitter
 	./testing/testcontainers-go

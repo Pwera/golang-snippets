@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package protocol;
+
+option java_multiple_files = true;
+
+// protoc protocol/user.proto --go_out=plugins=grpc:protocol
+
+service User {
+    rpc SubmitNewUser (NewUserRequest) returns (NewUserResponse) {
+    }
+}
+
+message NewUserRequest {
+    string email = 1;
+}
+message NewUserResponse {
+    bool status = 1;
+}
