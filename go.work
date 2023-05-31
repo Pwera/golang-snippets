@@ -4,6 +4,7 @@ use (
 	./circuitbreaker
 	./dependencyinjection/sarulabs-di
 	./functional/fuego
+	./integration/github
 	./integration/grpc
 	./integration/tilt
 	./integration/twitter

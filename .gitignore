@@ -3,3 +3,4 @@
 
 integration/twitter/variables.env
 integration/twitter/mongodbdata/
+integration/github/github/*.env
