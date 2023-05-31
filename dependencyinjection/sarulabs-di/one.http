@@ -1,0 +1,36 @@
+###
+GET http://localhost:8080/cars
+
+
+###
+
+POST http://localhost:8080/cars
+
+{
+"brand": "bmw",
+"color": "red"
+}
+
+
+###
+GET http://localhost:8080/cars/000000000000000000000000
+
+
+### Doesn't exist
+GET http://localhost:8080/cars/123456
+
+
+###
+PUT http://localhost:8080/cars/64777732f299590f2a62ffe7
+Accept: application/json
+
+{
+"id": "64777732f299590f2a62ffe7",
+"brand": "porsche",
+"color": "black"
+}
+
+###
+DELETE http://localhost:8080/cars/64777732f299590f2a62ffe7
+Accept: application/json
+
